@@ -12,7 +12,7 @@ import (
 func (s *Server) handlePostToAssetRegister() http.HandlerFunc {
 
 	return func(w http.ResponseWriter, r *http.Request) {
-		//get JSON payload
+		//get JSON payload.
 		body, err := ioutil.ReadAll(r.Body)
 
 		//post to crud service
