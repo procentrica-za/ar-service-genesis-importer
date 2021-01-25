@@ -44,7 +44,7 @@ func (s *Server) handlePostToAssetRegister() http.HandlerFunc {
 		if err != nil {
 			w.WriteHeader(500)
 			fmt.Fprint(w, err.Error())
-			fmt.Println("Registration is not able to be completed by internal error")
+			fmt.Println("Posting is not able to be completed by internal error")
 			return
 		}
 
@@ -52,7 +52,7 @@ func (s *Server) handlePostToAssetRegister() http.HandlerFunc {
 		defer req.Body.Close()
 
 		//create new response struct
-		var postAssetsResponse toAssetRegisterResult
+		var postAssetsResponse ARPostResult
 
 		//decode request into decoder which converts to the struct
 		decoder := json.NewDecoder(req.Body)
@@ -61,7 +61,7 @@ func (s *Server) handlePostToAssetRegister() http.HandlerFunc {
 		if err != nil {
 			w.WriteHeader(500)
 			fmt.Fprint(w, err.Error())
-			fmt.Println("Error occured in decoding registration response")
+			fmt.Println("Error occured in decoding Posting response")
 			return
 		}
 		js, jserr := json.Marshal(postAssetsResponse)
