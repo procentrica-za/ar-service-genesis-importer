@@ -131,6 +131,7 @@ type FunclocNodeList struct {
 }
 
 type ARPostResult struct {
+	Error                     string  `json:"error,omitempty"`
 	FunclocSuccess            bool    `json:"funclocsuccess,omitempty"`
 	FunclocMessage            string  `json:"funclocmessage,omitempty"`
 	FunclocID                 string  `json:"funclocid,omitempty"`
@@ -152,6 +153,11 @@ type ARPostResult struct {
 	ObservationflexvalMessage string  `json:"observationflexvalmessage,omitempty"`
 }
 
+type ErrorResult struct {
+	Message string `json:"message,omitempty"`
+}
+
 type ResponseList struct {
-	ResponseList []ARPostResult `json:"result"`
+	ErrorList    []ErrorResult  `json:"errorresponse,omitempty"`
+	ResponseList []ARPostResult `json:"result,omitempty"`
 }

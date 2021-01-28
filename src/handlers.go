@@ -21,6 +21,9 @@ func (s *Server) handlePostToAssetRegister() http.HandlerFunc {
 		assetresponse := ResponseList{}
 		assetresponse.ResponseList = []ARPostResult{}
 
+		//response variable for crud errors recieved
+		assetresponse.ErrorList = []ErrorResult{}
+
 		//For loop which deals with
 		for _, element := range funclocList.Flist {
 			//	for i := 0; i < len(funclocList.Flist); i++ {
@@ -40,10 +43,7 @@ func (s *Server) handlePostToAssetRegister() http.HandlerFunc {
 				fmt.Println("Error in communication with CRUD service endpoint for request to post assets")
 				return
 			}
-			if req.StatusCode != 200 {
-				fmt.Fprint(w, "Request to DB can't be completed...")
-				fmt.Println("unable to process post assets")
-			}
+
 			if req.StatusCode == 500 {
 				w.WriteHeader(500)
 				bodyBytes, err := ioutil.ReadAll(req.Body)
@@ -76,7 +76,7 @@ func (s *Server) handlePostToAssetRegister() http.HandlerFunc {
 				return
 			}
 
-			assetresponse.ResponseList = append(assetresponse.ResponseList, ARPostResult{postAssetsResponse.FunclocSuccess, postAssetsResponse.FunclocMessage, postAssetsResponse.FunclocID, postAssetsResponse.FunclocflexvalSuccess, postAssetsResponse.FunclocflexvalMessage, postAssetsResponse.FunclocnodeSuccess, postAssetsResponse.FunclocnodeMessage, postAssetsResponse.FunclocnodeID, postAssetsResponse.FuncloclinkSuccess, postAssetsResponse.FuncloclinkMessage, postAssetsResponse.FunclocnodeflexvalSuccess, postAssetsResponse.FunclocnodeflexvalMessage, postAssetsResponse.AssetSuccess, postAssetsResponse.AssetMessage, postAssetsResponse.PostedAssetList, postAssetsResponse.AssetflexvalSuccess, postAssetsResponse.AssetflexvalMessage, postAssetsResponse.ObservationflexvalSuccess, postAssetsResponse.ObservationflexvalMessage})
+			assetresponse.ResponseList = append(assetresponse.ResponseList, ARPostResult{postAssetsResponse.Error, postAssetsResponse.FunclocSuccess, postAssetsResponse.FunclocMessage, postAssetsResponse.FunclocID, postAssetsResponse.FunclocflexvalSuccess, postAssetsResponse.FunclocflexvalMessage, postAssetsResponse.FunclocnodeSuccess, postAssetsResponse.FunclocnodeMessage, postAssetsResponse.FunclocnodeID, postAssetsResponse.FuncloclinkSuccess, postAssetsResponse.FuncloclinkMessage, postAssetsResponse.FunclocnodeflexvalSuccess, postAssetsResponse.FunclocnodeflexvalMessage, postAssetsResponse.AssetSuccess, postAssetsResponse.AssetMessage, postAssetsResponse.PostedAssetList, postAssetsResponse.AssetflexvalSuccess, postAssetsResponse.AssetflexvalMessage, postAssetsResponse.ObservationflexvalSuccess, postAssetsResponse.ObservationflexvalMessage})
 
 		}
 
