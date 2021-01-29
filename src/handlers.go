@@ -66,7 +66,7 @@ func (s *Server) handlePostToAssetRegister() http.HandlerFunc {
 			//create new response struct
 			var postAssetsResponse ARPostResult
 
-			//decode request into decoder which converts to the struct
+			//decode request into decoder which converts to the struct.
 			decoder := json.NewDecoder(req.Body)
 			err = decoder.Decode(&postAssetsResponse)
 			if err != nil {
