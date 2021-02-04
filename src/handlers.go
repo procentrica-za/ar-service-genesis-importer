@@ -24,10 +24,15 @@ func (s *Server) handlePostToAssetRegister() http.HandlerFunc {
 		//response variable for crud errors recieved
 		assetresponse.ErrorList = []ErrorResult{}
 
+		//variable if there were any errors
+		var iserror bool
+		iserror = false
+
 		//For loop which deals with
 		for _, element := range funclocList.Flist {
 			//	for i := 0; i < len(funclocList.Flist); i++ {
 			//fmt.Println("JSON:", funclocList.Flist[i])
+
 			js, jserr1 := json.Marshal(element)
 			if jserr1 != nil {
 				w.WriteHeader(500)
@@ -78,6 +83,10 @@ func (s *Server) handlePostToAssetRegister() http.HandlerFunc {
 
 			assetresponse.ResponseList = append(assetresponse.ResponseList, ARPostResult{postAssetsResponse.Error, postAssetsResponse.FunclocSuccess, postAssetsResponse.FunclocMessage, postAssetsResponse.FunclocID, postAssetsResponse.FunclocflexvalSuccess, postAssetsResponse.FunclocflexvalMessage, postAssetsResponse.FunclocnodeSuccess, postAssetsResponse.FunclocnodeMessage, postAssetsResponse.FunclocnodeID, postAssetsResponse.FuncloclinkSuccess, postAssetsResponse.FuncloclinkMessage, postAssetsResponse.FunclocnodeflexvalSuccess, postAssetsResponse.FunclocnodeflexvalMessage, postAssetsResponse.AssetSuccess, postAssetsResponse.AssetMessage, postAssetsResponse.PostedAssetList, postAssetsResponse.AssetflexvalSuccess, postAssetsResponse.AssetflexvalMessage, postAssetsResponse.ObservationflexvalSuccess, postAssetsResponse.ObservationflexvalMessage})
 
+			if postAssetsResponse.Error != "" {
+				iserror = true
+			}
+
 		}
 
 		//convert struct back to JSON
@@ -89,8 +98,17 @@ func (s *Server) handlePostToAssetRegister() http.HandlerFunc {
 			return
 		}
 
-		w.Header().Set("Content-Type", "application/json")
-		w.WriteHeader(200)
-		w.Write(js)
+		if iserror == true {
+			w.Header().Set("Content-Type", "application/json")
+			w.WriteHeader(500)
+			w.Write(js)
+		}
+		if iserror == false {
+			w.Header().Set("Content-Type", "application/json")
+			w.WriteHeader(200)
+			w.Write(js)
+
+		}
+
 	}
 }
