@@ -24,10 +24,10 @@ type Asset struct {
 }
 
 type AssetFlexVal struct {
-	ID      string `json:"id,omitempty"`
-	AssetID string `json:"assetid,omitempty"`
-	Name    string `json:"name,omitempty"`
-	Value   string `json:"value,omitempty"`
+	ID        string `json:"id,omitempty"`
+	AssetID   string `json:"assetid,omitempty"`
+	Flexfldid string `json:"flexfldid,omitempty"`
+	Value     string `json:"value,omitempty"`
 }
 
 type ObservationFlexVal struct {
