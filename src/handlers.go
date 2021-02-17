@@ -21,7 +21,7 @@ func (s *Server) handlePostToAssetRegister() http.HandlerFunc {
 		assetresponse := ResponseList{}
 		assetresponse.ResponseList = []ARPostResult{}
 
-		//response variable for crud errors recieved
+		//response variable for crud errors recieved.
 		assetresponse.ErrorList = []ErrorResult{}
 
 		//variable if there were any errors
