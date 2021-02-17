@@ -30,8 +30,6 @@ func (s *Server) handlePostToAssetRegister() http.HandlerFunc {
 
 		//For loop which deals with
 		for _, element := range funclocList.Flist {
-			//	for i := 0; i < len(funclocList.Flist); i++ {
-			//fmt.Println("JSON:", funclocList.Flist[i])
 
 			js, jserr1 := json.Marshal(element)
 			if jserr1 != nil {
