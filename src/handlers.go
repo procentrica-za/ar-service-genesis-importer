@@ -43,7 +43,7 @@ func (s *Server) handlePostToAssetRegister() http.HandlerFunc {
 			if respErr != nil {
 				w.WriteHeader(500)
 				fmt.Fprint(w, respErr.Error())
-				fmt.Println("Error in communication with CRUD service endpoint for request to post assets")
+				fmt.Println("Error in communication with CRUD service endpoint for request to post assets.")
 				return
 			}
 
