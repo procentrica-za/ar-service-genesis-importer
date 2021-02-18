@@ -21,17 +21,15 @@ func (s *Server) handlePostToAssetRegister() http.HandlerFunc {
 		assetresponse := ResponseList{}
 		assetresponse.ResponseList = []ARPostResult{}
 
-		//response variable for crud errors recieved
+		//response variable for crud errors recieved.
 		assetresponse.ErrorList = []ErrorResult{}
 
 		//variable if there were any errors
 		var iserror bool
 		iserror = false
 
-		//For loop which deals with
+		//For loop which deals with.
 		for _, element := range funclocList.Flist {
-			//	for i := 0; i < len(funclocList.Flist); i++ {
-			//fmt.Println("JSON:", funclocList.Flist[i])
 
 			js, jserr1 := json.Marshal(element)
 			if jserr1 != nil {
@@ -45,7 +43,7 @@ func (s *Server) handlePostToAssetRegister() http.HandlerFunc {
 			if respErr != nil {
 				w.WriteHeader(500)
 				fmt.Fprint(w, respErr.Error())
-				fmt.Println("Error in communication with CRUD service endpoint for request to post assets")
+				fmt.Println("Error in communication with CRUD service endpoint for request to post assets.")
 				return
 			}
 
